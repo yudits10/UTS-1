@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+struct student {
+    string nama, nim, indeks;
+    double tugas, absen, uts, uas, hasil;
+};
+
+double nilaiakhir(int i, student mahasiswa[]) { 
+    return (mahasiswa[i].tugas * 0.2) + (mahasiswa[i].absen * 0.1) + (mahasiswa[i].uts * 0.3) + (mahasiswa[i].uas * 0.4);
+}
+
+string nilaitertinggi(student mahasiswa[], int jml) {
+    string ket;
+    int max = 0;
+    for (int i = 0; i < jml; i++) {
+        if (max < mahasiswa[i].hasil) {
+            max = mahasiswa[i].hasil;
+            ket = mahasiswa[i].nim;
+        }
+    }
+    return ket;
+}
+
+int main(){
+    const int jumlah_mahasiswa = 3;
+    student mahasiswa[jumlah_mahasiswa];
+    int i;
+    double hasil;
+
+    cout << "--------------------------------------------------------------------" << endl;
+    cout << "\t\t\t SELAMAT DATANG \t\t\t" << endl;
+    cout << "\t\t PROGRAM MENGHITUNG NILAI AKHIR MAHASISWA \t\t" << endl;
+    cout << "\t MAHASISWA TEKNIK INFORMATIKA SEKOLAH TINGGI TEKNOLOGI CIPASUNG \t" << endl;
+    cout << "---------------------------------------------------------------------" << endl;
+    cout << endl;
+
+    i = 0;
+    do {
+        cout << "=====================================" << endl;
+        cout << "\tDATA SISWA KE\t " << i+1 << endl;
+        cout << "=====================================" << endl;
+
+        cout << "Masukkan NAMA Mahasiswa ke-" << i+1 << endl;
+        cin >> mahasiswa[i].nama;
+
+        cout << "Masukkan NIM dari " << mahasiswa[i].nama << ": ";
+        cin >> mahasiswa[i].nim;
+        cout << endl;
+
+        cout << "Masukkan NILAI TUGAS dari " << mahasiswa[i].nama << ": ";
+        cin >> mahasiswa[i].tugas;
+        cout << endl;
+
+        cout << "Masukkan NILAI ABSENSI dari " << mahasiswa[i].nama << ": ";
+        cin >> mahasiswa[i].absen;
+        cout << endl;
+
+        cout << "Masukkan NILAI UTS dari " << mahasiswa[i].nama << ": ";
+        cin >> mahasiswa[i].uts;
+        cout << endl;
+
+        cout << "Masukkan NILAI UAS dari " << mahasiswa[i].nama << ": ";
+        cin >> mahasiswa[i].uas;
+        cout << endl;
+
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "NAMA" << "\t" << "NIM" << "\t" << "TUGAS" << "\t" << "ABSENSI" << "\t" << "UTS" << "\t" << "UAS" << "\t" << "NILAI AKHIR" << "\t" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+
+        mahasiswa[i].hasil = nilaiakhir(i, mahasiswa);
+
+        cout << mahasiswa[i].nama << "\t" << mahasiswa[i].nim << "\t" << mahasiswa[i].tugas << "\t" << mahasiswa[i].absen << "\t" << mahasiswa[i].uts << "\t" << mahasiswa[i].uas << "\t";
+        printf("%.2f ", mahasiswa[i].hasil);
+
+        if(mahasiswa[i].hasil >= 75){
+            cout << " (A) " << endl;
+        } else if(mahasiswa[i].hasil >= 60){
+            cout << " (B) " << endl;
+        } else if(mahasiswa[i].hasil >= 50){
+            cout << " (C) " << endl;
+        } else if(mahasiswa[i].hasil >= 40){
+            cout << " (D) " << endl;
+        } else {
+            cout << " (E) " << endl;
+        }
+        
+        cout << endl;
+
+        i = i + 1;
+    } while (i < jumlah_mahasiswa);
+    // }
+
+    cout << "Nilai tertinggi yaitu: " << nilaitertinggi(mahasiswa, jumlah_mahasiswa) << endl;
+
+    cout << endl;
+}
